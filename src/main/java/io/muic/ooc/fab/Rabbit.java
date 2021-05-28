@@ -26,34 +26,23 @@ public class Rabbit extends Animal {
      * @param location The location within the field.
      */
     public Rabbit(boolean randomAge, Field field, Location location) {
-        age = 0;
-        setAlive(true);
-        this.field = field;
-        setLocation(location);
-        if (randomAge) {
-            age = RANDOM.nextInt(MAX_AGE);
-        }
+        super(randomAge, field, location);
+    }
+
+    @Override
+    protected Location moveToNewLocation() {
+        return field.freeAdjacentLocation(getLocation());
     }
 
     /**
      * This is what the rabbit does most of the time - it runs around. Sometimes
      * it will breed or die of old age.
      *
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newAnimals A list to return newly born rabbits.
      */
-    public void run(List<Rabbit> newRabbits) {
-        incrementAge();
-        if (isAlive()) {
-            giveBirth(newRabbits);
-            // Try to move into a free location.
-            Location newLocation = field.freeAdjacentLocation(location);
-            if (newLocation != null) {
-                setLocation(newLocation);
-            } else {
-                // Overcrowding.
-                setDead();
-            }
-        }
+    @Override
+    public void act(List<Animal> newAnimals) {
+        super.act(newAnimals);
     }
 
     @Override

@@ -33,45 +33,30 @@ public class Fox extends Animal {
      * @param location The location within the field.
      */
     public Fox(boolean randomAge, Field field, Location location) {
-        age = 0;
-        setAlive(true);
-        this.field = field;
-        setLocation(location);
-        if (randomAge) {
-            age = RANDOM.nextInt(MAX_AGE);
-            foodLevel = RANDOM.nextInt(RABBIT_FOOD_VALUE);
-        } else {
-            // leave age at 0
-            foodLevel = RANDOM.nextInt(RABBIT_FOOD_VALUE);
+        super(randomAge, field, location);
+        foodLevel = RANDOM.nextInt(RABBIT_FOOD_VALUE);
+    }
+
+    @Override
+    protected Location moveToNewLocation() {
+        Location newLocation = findFood();
+        if (newLocation == null) {
+            // no food found - try to move to a free location
+            newLocation = field.freeAdjacentLocation(getLocation());
         }
+        return newLocation;
     }
 
     /**
      * This is what the fox does most of the time: it hunts for rabbits. In the
      * process, it might breed, die of hunger, or die of old age.
      *
-     * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newAnimals A list to return newly born foxes.
      */
-    public void hunt(List<Fox> newFoxes) {
-        incrementAge();
+    @Override
+    public void act(List<Animal> newAnimals) {
         incrementHunger();
-        if (isAlive()) {
-            giveBirth(newFoxes);
-            // Move towards a source of food if found.
-            Location newLocation = findFood();
-            if (newLocation == null) {
-                // No food found - try to move to a free location.
-                newLocation = field.freeAdjacentLocation(location);
-            }
-            // See if it was possible to move.
-            if (newLocation != null) {
-                setLocation(newLocation);
-            } else {
-                // Overcrowding.
-                setDead();
-            }
-        }
+        super.act(newAnimals);
     }
 
     /**

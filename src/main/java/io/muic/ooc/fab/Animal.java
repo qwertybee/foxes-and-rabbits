@@ -18,6 +18,16 @@ public abstract class Animal {
 
     private static final Random RANDOM = new Random();
 
+    public Animal(boolean randomAge, Field field, Location location) {
+        age = 0;
+        setAlive(true);
+        this.field = field;
+        setLocation(location);
+        if (randomAge) {
+            age = RANDOM.nextInt(getMaxAge());
+        }
+    }
+
 
     /**
      * Check whether the animal is alive or not.
@@ -112,9 +122,9 @@ public abstract class Animal {
      * Check whether or not this rabbit is to give birth at this step. New
      * births will be made into free adjacent locations.
      *
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newAnimals A list to return newly born animals.
      */
-    protected void giveBirth(List newRabbits) {
+    protected void giveBirth(List<Animal> newAnimals) {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
         List<Location> free = field.getFreeAdjacentLocations(location);
@@ -122,9 +132,25 @@ public abstract class Animal {
         for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Animal young = createYoung(false, field, loc);
-            newRabbits.add(young);
+            newAnimals.add(young);
         }
     }
 
+    public void act(List<Animal> newAnimals) {
+        incrementAge();
+        if (isAlive()) {
+            giveBirth(newAnimals);
+            // Try to move into a free location.
+            Location newLocation = moveToNewLocation();
+            if (newLocation != null) {
+                setLocation(newLocation);
+            } else {
+                // Overcrowding.
+                setDead();
+            }
+        }
+    }
+
+    protected abstract Location moveToNewLocation();
 
 }
