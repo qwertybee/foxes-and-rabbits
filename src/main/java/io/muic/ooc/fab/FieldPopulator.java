@@ -9,19 +9,17 @@ public class FieldPopulator {
 
     private static final Random RANDOM = new Random();
 
-    private final Map<AnimalType, Double> probabilityMap = new HashMap<>();
-
-    public FieldPopulator() {
+    private static Map<AnimalType, Double> probabilityMap = new HashMap<>() {{
         AnimalType[] animalTypes = AnimalType.values();
         for (AnimalType animalType : animalTypes) {
-            probabilityMap.put(animalType, animalType.getBreedingProbability());
+            put(animalType, animalType.getBreedingProbability());
         }
-    }
+    }};
 
     /**
      * Randomly populate the field with foxes and rabbits.
      */
-    void populate(Field field, List<Animal> animals) {
+    public void populate(Field field, List<Animal> animals) {
 
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
