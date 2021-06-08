@@ -3,6 +3,7 @@ package io.muic.ooc.fab;
 public enum AnimalType {
     FOX(0.08, Fox.class),
     RABBIT(0.02, Rabbit.class);
+//    TIGER()
 
     private double breedingProbability;
 

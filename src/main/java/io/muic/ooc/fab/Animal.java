@@ -3,7 +3,7 @@ package io.muic.ooc.fab;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Animal {
+public abstract class Animal extends Actor{
     // Whether the animal is alive or not.
     private boolean alive;
 
@@ -27,7 +27,6 @@ public abstract class Animal {
             age = RANDOM.nextInt(getMaxAge());
         }
     }
-
 
     /**
      * Check whether the animal is alive or not.
