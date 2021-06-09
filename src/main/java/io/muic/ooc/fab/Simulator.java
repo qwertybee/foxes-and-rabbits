@@ -54,9 +54,10 @@ public class Simulator {
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
-
+        AnimalType[] animalTypes = AnimalType.values();
+        for (AnimalType animalType : animalTypes) {
+            view.setColor(animalType.getAnimalClass(), animalType.getColor());
+        }
         // Setup a valid starting point.
         reset();
     }
