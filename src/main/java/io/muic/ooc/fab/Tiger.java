@@ -12,7 +12,7 @@ public class Tiger extends Animal{
     // The age to which a tiger can live.
     private static final int MAX_AGE = 400;
     // The likelihood of a tiger breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private static final double BREEDING_PROBABILITY = 0.03;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 1;
     // The food value of a single prey. In effect, this is the
@@ -63,7 +63,7 @@ public class Tiger extends Animal{
      * Make this tiger more hungry. This could result in the fox's death.
      */
     private void incrementHunger() {
-        foodLevel -= 3;
+        foodLevel -= 2;
         if (foodLevel <= 0) {
             setDead();
         }
