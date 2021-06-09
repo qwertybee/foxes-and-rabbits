@@ -15,10 +15,6 @@ public class Tiger extends Animal{
     private static final double BREEDING_PROBABILITY = 0.03;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 1;
-    // The food value of a single prey. In effect, this is the
-    // number of steps a tiger can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
-    private static final int FOX_FOOD_VALUE = 20;
     // Random generator
     private static final Random RANDOM = new Random();
     // The tiger's food level, which is increased by eating rabbits.
@@ -34,7 +30,7 @@ public class Tiger extends Animal{
     @Override
     public void initialize(boolean randomAge, Field field, Location location) {
         super.initialize(randomAge, field, location);
-        foodLevel = RANDOM.nextInt(RABBIT_FOOD_VALUE+FOX_FOOD_VALUE);
+        foodLevel = RANDOM.nextInt(AnimalType.FOX.getFoodValue()+AnimalType.RABBIT.getFoodValue());
     }
 
     /**
@@ -85,7 +81,7 @@ public class Tiger extends Animal{
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
+                    foodLevel = AnimalType.RABBIT.getFoodValue();
                     return where;
                 }
             }
@@ -93,7 +89,7 @@ public class Tiger extends Animal{
                 Fox fox = (Fox) animal;
                 if (fox.isAlive()) {
                     fox.setDead();
-                    foodLevel = FOX_FOOD_VALUE;
+                    foodLevel = AnimalType.FOX.getFoodValue();
                     return where;
                 }
             }
