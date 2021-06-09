@@ -25,8 +25,6 @@ public class Simulator {
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    // Random generator
-    private static final Random RANDOM = new Random();
 
     /**
      * Construct a simulation field with default size.

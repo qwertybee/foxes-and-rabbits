@@ -3,7 +3,7 @@ package io.muic.ooc.fab;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Animal extends Actor{
+public abstract class Animal implements Actor {
     // Whether the animal is alive or not.
     private boolean alive;
 
@@ -41,15 +41,6 @@ public abstract class Animal extends Actor{
         this.alive = alive;
     }
 
-    /**
-     * Return the fox's location.
-     *
-     * @return The fox's location.
-     */
-    public Location getLocation() {
-        return location;
-    }
-
     public abstract int getMaxAge();
 
     /**
@@ -61,7 +52,14 @@ public abstract class Animal extends Actor{
             setDead();
         }
     }
-
+    /**
+     * Return the actor's location.
+     *
+     * @return The actor's location.
+     */
+    public Location getLocation() {
+        return location;
+    }
 
     /**
      * Indicate that the fox is no longer alive. It is removed from the field.
@@ -80,7 +78,7 @@ public abstract class Animal extends Actor{
      *
      * @param newLocation The rabbit's new location.
      */
-    protected void setLocation(Location newLocation) {
+    public void setLocation(Location newLocation) {
         if (location != null) {
             field.clear(location);
         }
