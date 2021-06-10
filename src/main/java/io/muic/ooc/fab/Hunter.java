@@ -2,19 +2,18 @@ package io.muic.ooc.fab;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class Hunter extends Animal{
     // Characteristics shared by all tigers (class variables).
 
     // The age at which a tiger can start to breed.
-    private static final int BREEDING_AGE = 200;
+    private static final int BREEDING_AGE = 100;
     // The age to which a tiger can live.
     private static final int MAX_AGE = Integer.MAX_VALUE;
     // The likelihood of a tiger breeding.
-    private static final double BREEDING_PROBABILITY = 0.01;
+    private static final double BREEDING_PROBABILITY = 0.001;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 1;
+    private static final int MAX_LITTER_SIZE = 2;
 
     /**
      * Create a tiger. A tiger can be created as a new born (age zero and not

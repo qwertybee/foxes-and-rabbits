@@ -3,7 +3,7 @@ package io.muic.ooc.fab;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Animal implements Actor {
+public abstract class Animal {
     // Whether the animal is alive or not.
     private boolean alive;
 
