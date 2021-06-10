@@ -6,7 +6,7 @@ public enum AnimalType {
     FOX(0.08, Fox.class, Color.BLUE, 20),
     RABBIT(0.02, Rabbit.class, Color.ORANGE, 9),
     TIGER(0.03,Tiger.class, Color.GREEN, 50),
-    HUNTER(0.01, Hunter.class, Color.RED, 0);
+    HUNTER(0.001, Hunter.class, Color.RED, 0);
 
     private double breedingProbability;
 
