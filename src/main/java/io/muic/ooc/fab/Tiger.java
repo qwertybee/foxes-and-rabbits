@@ -7,14 +7,6 @@ import java.util.Random;
 public class Tiger extends Animal{
     // Characteristics shared by all tigers (class variables).
 
-    // The age at which a tiger can start to breed.
-    private static final int BREEDING_AGE = 50;
-    // The age to which a tiger can live.
-    private static final int MAX_AGE = 400;
-    // The likelihood of a tiger breeding.
-    private static final double BREEDING_PROBABILITY = 0.03;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 1;
     // Random generator
     private static final Random RANDOM = new Random();
     // The tiger's food level, which is increased by eating rabbits.
@@ -59,7 +51,7 @@ public class Tiger extends Animal{
      * Make this tiger more hungry. This could result in the fox's death.
      */
     private void incrementHunger() {
-        foodLevel -= 2;
+        foodLevel -= 1;
         if (foodLevel <= 0) {
             setDead();
         }
@@ -99,22 +91,22 @@ public class Tiger extends Animal{
 
     @Override
     public int getMaxAge() {
-        return MAX_AGE;
+        return 300;
     }
 
     @Override
     protected double getBreedingProbability() {
-        return BREEDING_PROBABILITY;
+        return 0.03;
     }
 
     @Override
     protected int getMaxLitterSize() {
-        return MAX_LITTER_SIZE;
+        return 1;
     }
 
     @Override
     protected int getBreedingAge() {
-        return BREEDING_AGE;
+        return 50;
     }
 
 }

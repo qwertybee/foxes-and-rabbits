@@ -7,14 +7,6 @@ import java.util.Random;
 public class Fox extends Animal {
     // Characteristics shared by all foxes (class variables).
 
-    // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
-    // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
-    // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
     // Random generator
     private static final Random RANDOM = new Random();
     // The fox's food level, which is increased by eating rabbits.
@@ -91,22 +83,22 @@ public class Fox extends Animal {
 
     @Override
     public int getMaxAge() {
-        return MAX_AGE;
+        return 150;
     }
 
     @Override
     protected double getBreedingProbability() {
-        return BREEDING_PROBABILITY;
+        return 0.1;
     }
 
     @Override
     protected int getMaxLitterSize() {
-        return MAX_LITTER_SIZE;
+        return 2;
     }
 
     @Override
     protected int getBreedingAge() {
-        return BREEDING_AGE;
+        return 15;
     }
 
 }
