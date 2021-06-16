@@ -1,41 +1,26 @@
 package io.muic.ooc.fab;
 
-import java.util.Iterator;
 import java.util.List;
 
-public class Hunter extends Animal{
-    // Characteristics shared by all tigers (class variables).
-
-    // The age at which a tiger can start to breed.
-    private static final int BREEDING_AGE = 100;
-    // The age to which a tiger can live.
-    private static final int MAX_AGE = Integer.MAX_VALUE;
-    // The likelihood of a tiger breeding.
-    private static final double BREEDING_PROBABILITY = 0.001;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+public class Hunter extends Actor{
 
     /**
-     * Create a tiger. A tiger can be created as a new born (age zero and not
-     * hungry) or with a random age and food level.
-     * @param randomAge If true, the tiger will have random age and hunger level.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
-     */
-    @Override
-    public void initialize(boolean randomAge, Field field, Location location) {
-        super.initialize(randomAge, field, location);
-    }
-
-    /**
-     * This is what the tiger does most of the time: it hunts for rabbits and foxes. In the
+     * This is what the hunter does most of the time: it hunts for rabbits tiger foxes. In the
      * process, it might breed, die of hunger, or die of old age.
      *
      * @param newAnimals A list to return newly born foxes and rabbits.
      */
     @Override
-    public void act(List<Animal> newAnimals) {
-        super.act(newAnimals);
+    public void act(List<Actor> newAnimals) {
+        if (isAlive()) {
+            // Try to move into a free location.
+            Location newLocation = moveToNewLocation();
+            if (newLocation != null) {
+                setLocation(newLocation);
+            } else {
+                setLocation(getLocation());
+            }
+        }
     }
 
     @Override
@@ -49,16 +34,14 @@ public class Hunter extends Animal{
     }
 
     /**
-     * Look for rabbits adjacent to the current location. Only the first live
-     * rabbit or fox is eaten.
+     * Look for food adjacent to the current location. Only the first live
+     * prey is eaten.
      *
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood() {
         List<Location> adjacent = field.adjacentLocations(location);
-        Iterator<Location> it = adjacent.iterator();
-        while (it.hasNext()) {
-            Location where = it.next();
+        for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
             if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
@@ -66,15 +49,13 @@ public class Hunter extends Animal{
                     rabbit.setDead();
                     return where;
                 }
-            }
-            else if (animal instanceof Fox) {
+            } else if (animal instanceof Fox) {
                 Fox fox = (Fox) animal;
                 if (fox.isAlive()) {
                     fox.setDead();
                     return where;
                 }
-            }
-            else if (animal instanceof Tiger) {
+            } else if (animal instanceof Tiger) {
                 Tiger tiger = (Tiger) animal;
                 if (tiger.isAlive()) {
                     tiger.setDead();
@@ -83,26 +64,6 @@ public class Hunter extends Animal{
             }
         }
         return null;
-    }
-
-    @Override
-    public int getMaxAge() {
-        return MAX_AGE;
-    }
-
-    @Override
-    protected double getBreedingProbability() {
-        return BREEDING_PROBABILITY;
-    }
-
-    @Override
-    protected int getMaxLitterSize() {
-        return MAX_LITTER_SIZE;
-    }
-
-    @Override
-    protected int getBreedingAge() {
-        return BREEDING_AGE;
     }
 
 }

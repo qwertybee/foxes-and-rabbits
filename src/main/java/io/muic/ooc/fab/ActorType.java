@@ -2,23 +2,23 @@ package io.muic.ooc.fab;
 
 import java.awt.*;
 
-public enum AnimalType {
+public enum ActorType {
     FOX(0.08, Fox.class, Color.BLUE, 20),
     RABBIT(0.02, Rabbit.class, Color.ORANGE, 9),
-    TIGER(0.03,Tiger.class, Color.GREEN, 50),
-    HUNTER(0.001, Hunter.class, Color.RED, 0);
+    TIGER(0.05,Tiger.class, Color.GREEN, 50),
+    HUNTER(0.003, Hunter.class, Color.RED, 0);
 
     private double breedingProbability;
 
     private Color color;
 
-    private Class animalClass;
+    private Class actorClass;
 
     private int foodValue;
 
-    AnimalType(double breedingProbability, Class animalClass, Color color, int foodValue) {
+    ActorType(double breedingProbability, Class actorClass, Color color, int foodValue) {
         this.breedingProbability = breedingProbability;
-        this.animalClass = animalClass;
+        this.actorClass = actorClass;
         this.color = color;
         this.foodValue = foodValue;
     }
@@ -27,8 +27,8 @@ public enum AnimalType {
         return breedingProbability;
     }
 
-    public Class getAnimalClass() {
-        return animalClass;
+    public Class getActorClass() {
+        return actorClass;
     }
 
     public Color getColor() {

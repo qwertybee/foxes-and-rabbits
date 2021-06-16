@@ -1,7 +1,6 @@
 package io.muic.ooc.fab;
 
 import java.util.List;
-import java.util.Random;
 
 public class Rabbit extends Animal {
     // Characteristics shared by all rabbits (class variables).
@@ -24,11 +23,11 @@ public class Rabbit extends Animal {
      * This is what the rabbit does most of the time - it runs around. Sometimes
      * it will breed or die of old age.
      *
-     * @param newAnimals A list to return newly born rabbits.
+     * @param newActors A list to return newly born rabbits.
      */
     @Override
-    public void act(List<Animal> newAnimals) {
-        super.act(newAnimals);
+    public void act(List<Actor> newActors) {
+        super.act(newActors);
     }
 
     @Override

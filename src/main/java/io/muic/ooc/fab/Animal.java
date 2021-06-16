@@ -3,87 +3,28 @@ package io.muic.ooc.fab;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Animal {
-    // Whether the animal is alive or not.
-    private boolean alive;
-
-    // The animal's position.
-    protected Location location;
-
-    // The field occupied.
-    protected Field field;
+public abstract class Animal extends Actor{
 
     // The animal's age.
     protected int age;
-
     private static final Random RANDOM = new Random();
 
     public void initialize(boolean randomAge, Field field, Location location) {
+        super.initialize(randomAge, field, location);
         age = 0;
-        setAlive(true);
-        this.field = field;
-        setLocation(location);
         if (randomAge) {
             age = RANDOM.nextInt(getMaxAge());
         }
     }
 
     /**
-     * Check whether the animal is alive or not.
-     *
-     * @return true if the animal is still alive.
-     */
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
-    public abstract int getMaxAge();
-
-    /**
-     * Increase the age. This could result in the rabbit's death.
+     * Increase the age. This could result in the animal's death.
      */
     protected void incrementAge() {
         age++;
         if (age > getMaxAge()) {
             setDead();
         }
-    }
-    /**
-     * Return the actor's location.
-     *
-     * @return The actor's location.
-     */
-    public Location getLocation() {
-        return location;
-    }
-
-    /**
-     * Indicate that the fox is no longer alive. It is removed from the field.
-     */
-    protected void setDead() {
-        setAlive(false);
-        if (location != null) {
-            field.clear(location);
-            location = null;
-            field = null;
-        }
-    }
-
-    /**
-     * Place the rabbit at the new location in the given field.
-     *
-     * @param newLocation The rabbit's new location.
-     */
-    public void setLocation(Location newLocation) {
-        if (location != null) {
-            field.clear(location);
-        }
-        location = newLocation;
-        field.place(this, newLocation);
     }
 
     /**
@@ -99,46 +40,48 @@ public abstract class Animal {
         return births;
     }
 
+    public abstract int getMaxAge();
     protected abstract double getBreedingProbability();
     protected abstract int getMaxLitterSize();
+    protected abstract int getBreedingAge();
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
+     * A animal can breed if it has reached the breeding age.
      *
-     * @return true if the rabbit can breed, false otherwise.
+     * @return true if the animal can breed, false otherwise.
      */
     private boolean canBreed() {
         return age >= getBreedingAge();
     }
 
-    protected abstract int getBreedingAge();
 
-    private Animal createYoung(boolean randomAge, Field field, Location location) {
-        return AnimalFactory.createAnimal(this.getClass(), field, location);
+    protected Animal createYoung(Field field, Location location) {
+        return (Animal) ActorFactory.createActor(this.getClass(), field, location);
     }
 
     /**
-     * Check whether or not this rabbit is to give birth at this step. New
+     * Check whether or not this animal is to give birth at this step. New
      * births will be made into free adjacent locations.
      *
      * @param newAnimals A list to return newly born animals.
      */
-    protected void giveBirth(List<Animal> newAnimals) {
+    protected void giveBirth(List<Actor> newAnimals) {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
         List<Location> free = field.getFreeAdjacentLocations(location);
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Animal young = createYoung(false, field, loc);
+            Animal young = createYoung(field, loc);
             newAnimals.add(young);
         }
     }
 
-    public void act(List<Animal> newAnimals) {
+    @Override
+    public void act(List<Actor> newActors) {
         incrementAge();
         if (isAlive()) {
-            giveBirth(newAnimals);
+            giveBirth(newActors);
             // Try to move into a free location.
             Location newLocation = moveToNewLocation();
             if (newLocation != null) {
@@ -149,7 +92,5 @@ public abstract class Animal {
             }
         }
     }
-
-    protected abstract Location moveToNewLocation();
 
 }

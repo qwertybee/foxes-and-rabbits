@@ -3,11 +3,9 @@ package io.muic.ooc.fab;
 
 import io.muic.ooc.fab.view.SimulatorView;
 
-import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Color;
 
 public class Simulator {
 
@@ -18,7 +16,7 @@ public class Simulator {
     private static final int DEFAULT_DEPTH = 80;
 
     // Lists of animals in the field.
-    private List<Animal> animals;
+    private List<Actor> actors;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -47,14 +45,14 @@ public class Simulator {
             width = DEFAULT_WIDTH;
         }
 
-        animals = new ArrayList<>();
+        actors = new ArrayList<>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        AnimalType[] animalTypes = AnimalType.values();
-        for (AnimalType animalType : animalTypes) {
-            view.setColor(animalType.getAnimalClass(), animalType.getColor());
+        ActorType[] actorTypes = ActorType.values();
+        for (ActorType actorType : actorTypes) {
+            view.setColor(actorType.getActorClass(), actorType.getColor());
         }
         // Setup a valid starting point.
         reset();
@@ -89,18 +87,18 @@ public class Simulator {
         step++;
 
         // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<>();
+        List<Actor> newActors = new ArrayList<>();
         // Let all animals act.
-        for (Iterator<Animal> it = animals.iterator(); it.hasNext();) {
-            Animal animal = it.next();
-            animal.act(newAnimals);
-            if (!animal.isAlive()) {
+        for (Iterator<Actor> it = actors.iterator(); it.hasNext();) {
+            Actor actor = it.next();
+            actor.act(newActors);
+            if (!actor.isAlive()) {
                 it.remove();
             }
         }
 
         // Add the newly born foxes and rabbits to the main lists.
-        animals.addAll(newAnimals);
+        actors.addAll(newActors);
 
         view.showStatus(step, field);
     }
@@ -110,8 +108,8 @@ public class Simulator {
      */
     public void reset() {
         step = 0;
-        animals.clear();
-        new FieldPopulator().populate(field, animals);
+        actors.clear();
+        new FieldPopulator().populate(field, actors);
         // Show the starting state in the view.
         view.showStatus(step, field);
     }

@@ -30,7 +30,7 @@ public class Fox extends Animal {
     @Override
     public void initialize(boolean randomAge, Field field, Location location) {
         super.initialize(randomAge, field, location);
-        foodLevel = RANDOM.nextInt(AnimalType.RABBIT.getFoodValue());
+        foodLevel = RANDOM.nextInt(ActorType.RABBIT.getFoodValue());
     }
 
     @Override
@@ -47,12 +47,12 @@ public class Fox extends Animal {
      * This is what the fox does most of the time: it hunts for rabbits. In the
      * process, it might breed, die of hunger, or die of old age.
      *
-     * @param newAnimals A list to return newly born foxes.
+     * @param newActors A list to return newly born foxes.
      */
     @Override
-    public void act(List<Animal> newAnimals) {
+    public void act(List<Actor> newActors) {
         incrementHunger();
-        super.act(newAnimals);
+        super.act(newActors);
     }
 
     /**
@@ -81,7 +81,7 @@ public class Fox extends Animal {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
-                    foodLevel = AnimalType.RABBIT.getFoodValue();
+                    foodLevel = ActorType.RABBIT.getFoodValue();
                     return where;
                 }
             }
