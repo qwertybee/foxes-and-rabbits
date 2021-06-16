@@ -91,7 +91,7 @@ public class Tiger extends Animal{
 
     @Override
     public int getMaxAge() {
-        return 300;
+        return 200;
     }
 
     @Override
