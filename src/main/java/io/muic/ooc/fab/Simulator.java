@@ -1,6 +1,10 @@
 package io.muic.ooc.fab;
 
 
+import io.muic.ooc.fab.actor.Actor;
+import io.muic.ooc.fab.actor.ActorType;
+import io.muic.ooc.fab.field.Field;
+import io.muic.ooc.fab.field.FieldPopulator;
 import io.muic.ooc.fab.view.SimulatorView;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package io.muic.ooc.fab.view;
 
 
-import io.muic.ooc.fab.Field;
-import io.muic.ooc.fab.FieldStats;
+import io.muic.ooc.fab.field.Field;
+import io.muic.ooc.fab.field.FieldStats;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

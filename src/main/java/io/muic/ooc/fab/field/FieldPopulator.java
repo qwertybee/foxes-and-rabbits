@@ -1,4 +1,9 @@
-package io.muic.ooc.fab;
+package io.muic.ooc.fab.field;
+
+import io.muic.ooc.fab.Location;
+import io.muic.ooc.fab.actor.Actor;
+import io.muic.ooc.fab.actor.ActorFactory;
+import io.muic.ooc.fab.actor.ActorType;
 
 import java.util.HashMap;
 import java.util.List;

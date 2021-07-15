@@ -1,11 +1,16 @@
-package io.muic.ooc.fab;
+package io.muic.ooc.fab.actor;
+
+import io.muic.ooc.fab.actor.Fox;
+import io.muic.ooc.fab.actor.Hunter;
+import io.muic.ooc.fab.actor.Rabbit;
+import io.muic.ooc.fab.actor.Tiger;
 
 import java.awt.*;
 
 public enum ActorType {
     RABBIT(0.12, Rabbit.class, Color.ORANGE, 9),
     FOX(0.1, Fox.class, Color.BLUE, 20),
-    TIGER(0.03,Tiger.class, Color.GREEN, 50),
+    TIGER(0.03, Tiger.class, Color.GREEN, 50),
     HUNTER(0.005, Hunter.class, Color.RED, 0);
 
     private double breedingProbability;

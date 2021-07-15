@@ -1,4 +1,6 @@
-package io.muic.ooc.fab;
+package io.muic.ooc.fab.actor;
+
+import io.muic.ooc.fab.Location;
 
 import java.util.List;
 
